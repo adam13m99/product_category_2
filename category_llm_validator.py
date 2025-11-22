@@ -140,7 +140,7 @@ GROUPS_TO_PROCESS = [
 ]
 
 CONFIG = {
-    "GEMINI_API_KEY": os.getenv("GENAI_API_KEY", "AIzaSyCumiyi3RDCJmYLvR9_zM-cshEwEo4yLkc"),
+    "GEMINI_API_KEY": os.getenv("GENAI_API_KEY", "AIzaSyBY1JI7IW-mNA2ZmgD2Q5fkbtNpF629HX4"),
     "MODEL_NAME": "gemini-2.5-flash",  # Non-lite version for better accuracy (handle region access separately)
     "TEMPERATURE": 0.3,  # Low temperature for consistency
 
