@@ -132,15 +132,15 @@ GROUPS_TO_PROCESS = [
     # ("filtered_group5.csv", "validated_group5.csv"),
     # ("filtered_group6.csv", "validated_group6.csv"),
     # ("filtered_group7.csv", "validated_group7.csv"),
-    # ("filtered_group8.csv", "validated_group8.csv"),
-    ("filtered_group9.csv", "validated_group9.csv"),    
-    ("filtered_group10.csv", "validated_group10.csv"),  
-    ("filtered_group11.csv", "validated_group11.csv"),
-    ("filtered_group12.csv", "validated_group12.csv"), 
+     ("filtered_group8.csv", "validated_group8.csv"),
+    # ("filtered_group9.csv", "validated_group9.csv"),
+    # ("filtered_group10.csv", "validated_group10.csv"),
+    # ("filtered_group11.csv", "validated_group11.csv"),
+    # ("filtered_group12.csv", "validated_group12.csv"),
 ]
 
 CONFIG = {
-    "GEMINI_API_KEY": os.getenv("GENAI_API_KEY", "AIzaSyBY1JI7IW-mNA2ZmgD2Q5fkbtNpF629HX4"),
+    "GEMINI_API_KEY": os.getenv("GENAI_API_KEY", "AIzaSyD-ZB5skJHpBvsvH_iW_HIqB-J0dOthW18"),
     "MODEL_NAME": "gemini-2.5-flash",  # Non-lite version for better accuracy (handle region access separately)
     "TEMPERATURE": 0.3,  # Low temperature for consistency
 
