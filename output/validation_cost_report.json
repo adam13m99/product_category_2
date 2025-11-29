@@ -1,12 +1,12 @@
 {
-  "total_calls": 11023,
-  "successful_calls": 11023,
+  "total_calls": 5740,
+  "successful_calls": 5740,
   "failed_calls": 0,
-  "input_tokens": 42615164,
-  "output_tokens": 18004218,
-  "input_cost_usd": 4.2615164000000005,
-  "output_cost_usd": 7.201687200000001,
-  "total_cost_usd": 11.463203600000002,
-  "avg_cost_per_call": 0.0010399350086183435,
+  "input_tokens": 24028274,
+  "output_tokens": 8773635,
+  "input_cost_usd": 2.4028274,
+  "output_cost_usd": 3.5094540000000003,
+  "total_cost_usd": 5.9122814,
+  "avg_cost_per_call": 0.0010300141811846692,
   "success_rate": 100.0
 }

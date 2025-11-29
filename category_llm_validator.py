@@ -140,7 +140,7 @@ GROUPS_TO_PROCESS = [
 ]
 
 CONFIG = {
-    "GEMINI_API_KEY": os.getenv("GENAI_API_KEY", "AIzaSyD-ZB5skJHpBvsvH_iW_HIqB-J0dOthW18"),
+    "GEMINI_API_KEY": os.getenv("GENAI_API_KEY", "AIzaSyASo1b1zxLEgoXtefchhjnvhgcNLCFekR4"),
     "MODEL_NAME": "gemini-2.5-flash",  # Non-lite version for better accuracy (handle region access separately)
     "TEMPERATURE": 0.3,  # Low temperature for consistency
 
@@ -463,9 +463,11 @@ Return only valid JSON:
                 error_msg = str(e)
 
                 # Categorize error type
-                if "goaway" in error_msg.lower() or "enhance_your_calm" in error_msg.lower() or "client_misbehavior" in error_msg.lower():
+                if "finish_reason" in error_msg.lower() or "recitation" in error_msg.lower():
+                    error_category = "CONTENT_FILTER"
+                elif "goaway" in error_msg.lower() or "enhance_your_calm" in error_msg.lower() or "client_misbehavior" in error_msg.lower():
                     error_category = "GOAWAY_RATE_LIMIT"
-                elif "429" in error_msg or "quota" in error_msg.lower() or "rate" in error_msg.lower():
+                elif "429" in error_msg or "quota" in error_msg.lower():
                     error_category = "RATE_LIMIT"
                 elif "403" in error_msg or "permission" in error_msg.lower() or "banned" in error_msg.lower():
                     error_category = "PERMISSION"
@@ -734,9 +736,11 @@ Return a JSON array with one object per product, in the exact same order:
                 error_msg = str(e)
 
                 # Categorize error type
-                if "goaway" in error_msg.lower() or "enhance_your_calm" in error_msg.lower() or "client_misbehavior" in error_msg.lower():
+                if "finish_reason" in error_msg.lower() or "recitation" in error_msg.lower():
+                    error_category = "CONTENT_FILTER"
+                elif "goaway" in error_msg.lower() or "enhance_your_calm" in error_msg.lower() or "client_misbehavior" in error_msg.lower():
                     error_category = "GOAWAY_RATE_LIMIT"
-                elif "429" in error_msg or "quota" in error_msg.lower() or "rate" in error_msg.lower():
+                elif "429" in error_msg or "quota" in error_msg.lower():
                     error_category = "RATE_LIMIT"
                 elif "403" in error_msg or "permission" in error_msg.lower() or "banned" in error_msg.lower():
                     error_category = "PERMISSION"
@@ -752,8 +756,9 @@ Return a JSON array with one object per product, in the exact same order:
                 print(f"   Category: {error_category}")
                 print(f"   Message: {error_msg[:200]}")
 
-                # CRITICAL: Stop immediately on 403 or 429 errors to prevent accuracy loss
-                if error_category in ["PERMISSION", "RATE_LIMIT"]:
+                # CRITICAL: Stop immediately ONLY on true 403 or 429 quota errors
+                # Content filter errors (finish_reason) should NOT stop processing
+                if error_category in ["PERMISSION"] or (error_category == "RATE_LIMIT" and "429" in error_msg):
                     print(f"\n[!] CRITICAL ERROR DETECTED: {error_category}")
                     print(f"[!] STOPPING PROCESSING TO PREVENT ACCURACY LOSS")
                     raise CriticalAPIError(error_category, error_msg)
